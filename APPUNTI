@@ -1,0 +1,37 @@
+APPUNTI 
+
+Un'applicazione che prende in input un suono generico e restituisce un feedback grafico in relazione ad esso.
+
+  Vogliamo che sia una traduzione fine a se stessa (un colore o un immagine che interpreti quanto registrato) o che ci sia un intento educazionale (un'immagine, un colore, 
+  una frase che dia una direzione di "apprendimento")?
+
+  Possibilità di esportare i suoni creati/registrati.
+
+
+Tipi di input
+  
+  Microfono  (post processing)
+
+  Strumento collegato via cavo, per implementare una parte di sintesi ed effettistica con Web Audio API (real time processing)
+
+
+
+LIVE PERFORMANCE ?????????
+  ???? Usare l'app come synth per creare dei sample da importare su sonic pi e fare live coding????
+
+
+
+
+
+SITO 
+
+  INTERFACCIA
+
+
+
+
+
+
+
+RISPOSTA VISIVA 
+  Vogliamo dare grande enfasi al timbro nella rappresentazione grafica, distinguendo con grafiche diverse timbri diversi.
