@@ -1,4 +1,4 @@
---> per testarle gli ho fatto prendere in input direttamente il microfono
+// --> per testarle gli ho fatto prendere in input direttamente il microfono
   
 // DELAY
 
