@@ -1,0 +1,117 @@
+/* styles.css */
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #121212;
+  color: #ffffff;
+}
+  
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+  
+.top-section {
+  height: 20%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  background-color: #1f1f1f;
+}
+  
+.app-title {
+  font-size: 1.5em;
+  color: #00ffcc;
+}
+  
+.navbar a {
+  color: #ffffff;
+  text-decoration: none;
+  margin: 0 10px;
+}
+  
+.navbar a:hover {
+  text-decoration: underline;
+}
+  
+.central-section {
+  height: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #282828;
+}
+  
+.graphics-display {
+  width: 90%;
+  height: 90%;
+  background: #000;
+  border: 2px solid #00ffcc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #00ffcc;
+}
+  
+.bottom-section {
+  height: 20%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px; /* Padding on the sides */
+  background-color: #1f1f1f;
+  position: relative; /* Needed for positioning the help window */
+}
+  
+  
+.main-toolbar,
+.effects-toolbar {
+  display: flex;
+  gap: 10px;
+}
+
+.effects-toolbar {
+  flex: 1; /* Fills available space */
+  display: flex;
+  justify-content: center; /* Centers horizontally */
+
+}
+
+.toolbar-button,
+.effect-button {
+  padding: 10px 15px;
+  background-color: #282828;
+  color: #00ffcc;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+  
+.toolbar-button:hover,
+.effect-button:hover {
+    background-color: #00ffcc;
+    color: #000;
+}
+  
+.help-window {
+  position: absolute;
+  right: 0px; /* Keep aligned with the right edge of the body */
+  top: 50%; /* Vertically align in the .bottom-section */
+  transform: translateY(-50%); /* Adjust for proper centering */
+  height: calc(100% - 20px); /* Match the height of the toolbar minus padding */
+  width: 180px; /* Fixed width */
+  display: flex;
+  align-items: center; /* Center content vertically */
+  justify-content: center; /* Center text horizontally */
+  padding: 10px;
+  font-size: 0.9em;
+  color: #cccccc;
+  border: 1px solid #555;
+  border-radius: 3.5%; /* Rounded left corner */
+  background: #121212;
+  z-index: 10; /* Ensure it appears above other elements */
+}

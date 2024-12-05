@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Musical Web App</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/script.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Top section: Title and Navigation Bar -->
+    <header class="top-section">
+      <h1 class="app-title">NOME PROGETTO PAZZO SGRAVATO</h1>
+      <nav class="navbar">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <!-- Central section: Graphical Representations -->
+    <main class="central-section">
+      <div class="graphics-display">
+        <p>This is where the magic happens baby ;) <br> (not for now tho)</p>
+      </div>
+    </main>
+
+    <!-- Bottom section: Toolbar -->
+    <footer class="bottom-section">
+      <div class="main-toolbar">
+        <button class="toolbar-button" id="record">
+          <i class="fa-solid fa-circle-dot"></i>
+        </button>
+        <button class="toolbar-button" id="play">
+          <i class="fas fa-play"></i>
+        </button>
+        <button class="toolbar-button" id="pause">
+          <i class="fas fa-pause"></i>
+        </button>
+        <button class="toolbar-button" id="settings">
+          <i class="fas fa-cog"></i>
+        </button>
+        <button class="toolbar-button" id="export">
+          <i class="fa-solid fa-share-from-square"></i>
+        </button>
+      </div>
+      <div class="effects-toolbar">
+        <button class="effect-button" id="reverb">Reverb</button>
+        <button class="effect-button" id="delay">Delay</button>
+        <button class="effect-button" id="saturator">Saturator</button>
+        <button class="effect-button" id="lfo">LFO</button>
+      </div>
+      <div class="help-window" id="help-window">
+        Hover over a button for help!
+      </div>
+    </footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
