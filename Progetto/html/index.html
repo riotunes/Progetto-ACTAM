@@ -56,29 +56,30 @@
           <input type="range" min="0" max="10" value="5"> Time
         </div>
 
-        <button class="effect-button" id="delay" onmouseover="delayinfo()" ondblclick="toggleCurtain('delay-menu')">Delay</button>
         <div class="curtain-menu" id="delay-menu">
           <p>Delay Parameters:</p>
-          <input type="range" min="0" max="500" value="250"> Delay Time
+          <input type="range" min="0" max="500" value="250"> Time
           <br>
           <input type="range" min="0" max="100" value="50"> Feedback
         </div>
+        <button class="effect-button" id="delay" onmouseover="delayinfo()" ondblclick="toggleCurtain('delay-menu')">Delay</button>
 
-        <button class="effect-button" id="saturator" onmouseover="saturatorinfo()" ondblclick="toggleCurtain('saturator-menu')">Saturator</button>
         <div class="curtain-menu" id="saturator-menu">
           <p>Saturator Parameters:</p>
           <input type="range" min="0" max="500" value="250"> Frequency
           <br>
           <input type="range" min="0" max="100" value="50"> Feedback
         </div>
-
-        <button class="effect-button" id="lfo" onmouseover="lfoinfo()" ondblclick="toggleCurtain('lfo-menu')">LFO</button>
+        <button class="effect-button" id="saturator" onmouseover="saturatorinfo()" ondblclick="toggleCurtain('saturator-menu')">Saturator</button>
+        
         <div class="curtain-menu" id="lfo-menu">
           <p>LFO Parameters:</p>
           <input type="range" min="0" max="500" value="250"> Frequency
           <br>
           <input type="range" min="0" max="100" value="50"> Feedback
         </div>
+        <button class="effect-button" id="lfo" onmouseover="lfoinfo()" ondblclick="toggleCurtain('lfo-menu')">LFO</button>
+        
       </div>
 
       <div class="help-window" id="help-window">

@@ -118,7 +118,7 @@ body {
 
 .curtain-menu {
   display: none; /* Hidden by default */
-  position: absolute;
+  position: relative;
   background-color: #1f1f1f;
   color: #ffffff;
   padding: 10px;
@@ -126,7 +126,7 @@ body {
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 20;
-  width: 200px; /* Set a width for the menu */
+  width: 210px; /* Set a width for the menu */
 }
 
 .effect-button {
