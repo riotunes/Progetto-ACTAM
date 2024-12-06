@@ -25,3 +25,33 @@ function saturatorinfo() {
 function lfoinfo() {
   document.getElementById("help-window").innerHTML = "This is the LFO button! Press it to add an LFO to your sound! Double click on it to access the effect’s specific settings!";
 }
+
+
+// Keep track of the currently open menu
+let openMenu = null;
+
+function toggleCurtain(menuId) {
+  const menu = document.getElementById(menuId);
+  
+  // Close any previously open menu
+  if (openMenu && openMenu !== menu) {
+    openMenu.style.display = 'none';
+  }
+
+  // Toggle the current menu
+  if (menu.style.display === 'block') {
+    menu.style.display = 'none';
+    openMenu = null; // No menu is open
+  } else {
+    menu.style.display = 'block';
+    openMenu = menu; // Set the open menu
+  }
+}
+
+// Close the menu if clicking outside
+document.addEventListener('click', (event) => {
+  if (openMenu && !openMenu.contains(event.target) && !event.target.matches('.effect-button')) {
+    openMenu.style.display = 'none';
+    openMenu = null; // No menu is open
+  }
+});

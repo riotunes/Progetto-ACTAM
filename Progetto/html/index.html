@@ -46,17 +46,46 @@
           <i class="fa-solid fa-share-from-square"></i>
         </button>
       </div>
+
       <div class="effects-toolbar">
-        <button class="effect-button" id="reverb" onmouseover="reverbinfo()">Reverb</button>
-        <button class="effect-button" id="delay" onmouseover="delayinfo()">Delay</button>
-        <button class="effect-button" id="saturator" onmouseover="saturatorinfo()">Saturator</button>
-        <button class="effect-button" id="lfo" onmouseover="lfoinfo()">LFO</button>
+        <button class="effect-button" id="reverb" onmouseover="reverbinfo()" ondblclick="toggleCurtain('reverb-menu')">Reverb</button>
+        <div class="curtain-menu" id="reverb-menu">
+          <p>Reverb Parameters:</p>
+          <input type="range" min="0" max="100" value="50"> Depth
+          <br>
+          <input type="range" min="0" max="10" value="5"> Time
+        </div>
+
+        <button class="effect-button" id="delay" onmouseover="delayinfo()" ondblclick="toggleCurtain('delay-menu')">Delay</button>
+        <div class="curtain-menu" id="delay-menu">
+          <p>Delay Parameters:</p>
+          <input type="range" min="0" max="500" value="250"> Delay Time
+          <br>
+          <input type="range" min="0" max="100" value="50"> Feedback
+        </div>
+
+        <button class="effect-button" id="saturator" onmouseover="saturatorinfo()" ondblclick="toggleCurtain('saturator-menu')">Saturator</button>
+        <div class="curtain-menu" id="saturator-menu">
+          <p>Saturator Parameters:</p>
+          <input type="range" min="0" max="500" value="250"> Frequency
+          <br>
+          <input type="range" min="0" max="100" value="50"> Feedback
+        </div>
+
+        <button class="effect-button" id="lfo" onmouseover="lfoinfo()" ondblclick="toggleCurtain('lfo-menu')">LFO</button>
+        <div class="curtain-menu" id="lfo-menu">
+          <p>LFO Parameters:</p>
+          <input type="range" min="0" max="500" value="250"> Frequency
+          <br>
+          <input type="range" min="0" max="100" value="50"> Feedback
+        </div>
       </div>
+
       <div class="help-window" id="help-window">
         Hover over a button for help!
       </div>
     </footer>
   </div>
-  <script src="script.js"></script>
+  
 </body>
 </html>
