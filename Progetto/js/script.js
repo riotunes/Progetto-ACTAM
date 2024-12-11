@@ -1,3 +1,5 @@
+import { started } from './record.js';
+
 function recordinfo() {
   if(!started) {
     document.getElementById("help-window").innerHTML = "This is the record button! Press it to start and stop the recording of your sounds!";
