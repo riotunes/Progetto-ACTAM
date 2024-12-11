@@ -20,18 +20,18 @@ navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
     }
 });
 
-startstop_function = function() {
+startstop_function = function() { // è una funzione sola perché il pulsante rec avvia e ferma la registrazione
     if(!started) {
         mediaRecorder.start();
         started = true;
-        record.classList.toggle("on");
-        document.getElementById("help-window").innerHTML = "recording...";
+        record.classList.toggle("on");    // non so come si chiamerà la classe dei pulsanti accesi, per ora l'ho chiamata on
+        document.getElementById("help-window").innerHTML = "recording...";    // questo non funziona, credo non si possa cambiare l'innerHTML perché c'è già il mouseover
     }
     else {
         mediaRecorder.stop();
         started = false;
         record.classList.toggle("on");
-        document.getElementById("help-window").innerHTML = "audio recorded!";
+        document.getElementById("help-window").innerHTML = "audio recorded!";   // idem
     }
     
 }
