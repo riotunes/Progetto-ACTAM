@@ -5,7 +5,7 @@ let started = false;
 
 const record = document.getElementById('record');
 const play = document.getElementById('play')
-const audio
+let audio
 
 navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
     mediaRecorder = new MediaRecorder(stream);
