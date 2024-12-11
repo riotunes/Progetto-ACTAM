@@ -1,11 +1,5 @@
-import { started } from './record.js';
-
 function recordinfo() {
-  if(!started) {
     document.getElementById("help-window").innerHTML = "This is the record button! Press it to start and stop the recording of your sounds!";
-  }
-  else
-    document.getElementById("help-window").innerHTML = "recording...";
 }
 function playinfo() {
   document.getElementById("help-window").innerHTML = "This is the play button! Press it to listen to your recording with the effects you chose!";
