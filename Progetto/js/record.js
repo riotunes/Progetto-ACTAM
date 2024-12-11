@@ -25,11 +25,13 @@ startstop_function = function() {
         mediaRecorder.start();
         started = true;
         record.classList.toggle("on");
+        document.getElementById("help-window").innerHTML = "recording...";
     }
     else {
         mediaRecorder.stop();
         started = false;
         record.classList.toggle("on");
+        document.getElementById("help-window").innerHTML = "audio recorded!";
     }
     
 }
