@@ -5,7 +5,7 @@ let started = false;
 
 const record = document.getElementById('record');
 const play = document.getElementById('play')
-const audioPlayback = document.getElementById('audioPlayback');
+const audio
 
 navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
     mediaRecorder = new MediaRecorder(stream);
@@ -15,7 +15,7 @@ navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
     mediaRecorder.onstop = () => {
         const audioBlob = new Blob(audioChunks, {type: 'audio/wav' });
         audioUrl = URL.createObjectURL(audioBlob);
-        audioPlayback.src = audioUrl;
+        audio = new Audio(audioUrl);
         audioChunks = [];
     }
 });
@@ -35,7 +35,7 @@ startstop_function = function() {
 }
 
 play_function = function() {
-    audioPlayback.play();
+    audio.play();
 }
 
 record.onclick = startstop_function
