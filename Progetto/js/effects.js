@@ -62,7 +62,7 @@ function makeDistortionCurve(g) {
   return curve;
 }
 
-function saturation() {
+function saturator() {
    navigator.mediaDevices.getUserMedia({audio: true, video: false}).then(function(stream) {
   c = new AudioContext();
   c.resume();
