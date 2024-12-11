@@ -1,7 +1,7 @@
 let mediaRecorder;
 let audioChunks = [];
 let audioUrl;
-let started = false;
+export const started = false;
 
 const record = document.getElementById('record');
 const play = document.getElementById('play')
