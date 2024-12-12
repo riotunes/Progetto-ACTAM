@@ -1,5 +1,5 @@
 function recordinfo() {
-  document.getElementById("help-window").innerHTML = "This is the record button! Press it to start and stop the recording of your sounds!";
+    document.getElementById("help-window").innerHTML = "This is the record button! Press it to start and stop the recording of your sounds!";
 }
 function playinfo() {
   document.getElementById("help-window").innerHTML = "This is the play button! Press it to listen to your recording with the effects you chose!";
