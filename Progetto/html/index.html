@@ -31,25 +31,25 @@
     <!-- Bottom section: Toolbar -->
     <footer class="bottom-section">
       <div class="main-toolbar">
-        <button class="toolbar-button" id="record" onmouseover="recordinfo()">
+        <button id="record" onmouseover="recordinfo()">
           <i class="fa-solid fa-circle-dot"></i>
         </button>
-        <button class="toolbar-button" id="play" onmouseover="playinfo()">
+        <button id="play" onmouseover="playinfo()">
           <i class="fas fa-play"></i>
         </button>
-        <button class="toolbar-button" id="stop" onmouseover="stopinfo()">
+        <button id="stop" onmouseover="stopinfo()">
           <i class="fas fa-pause"></i>
         </button>
-        <button class="toolbar-button" id="settings" onmouseover="settingsinfo()">
+        <button id="settings" onmouseover="settingsinfo()">
           <i class="fas fa-cog"></i>
         </button>
-        <button class="toolbar-button" id="export" onmouseover="exportinfo()">
+        <button id="export" onmouseover="exportinfo()">
           <i class="fa-solid fa-share-from-square"></i>
         </button>
       </div>
 
       <div class="effects-toolbar">
-        <button class="effect-button" id="reverb" onmouseover="reverbinfo()" ondblclick="toggleCurtain('reverb-menu')">Reverb</button>
+        <button id="reverb" onmouseover="reverbinfo()" ondblclick="toggleCurtain('reverb-menu')">Reverb</button>
         <div class="curtain-menu" id="reverb-menu">
           <p>Reverb Parameters:</p>
           <input type="range" min="0" max="100" value="50"> Depth
@@ -63,7 +63,7 @@
           <br>
           <input type="range" min="0" max="100" value="50"> Feedback
         </div>
-        <button class="effect-button" id="delay" onmouseover="delayinfo()" ondblclick="toggleCurtain('delay-menu')">Delay</button>
+        <button id="delay" onmouseover="delayinfo()" ondblclick="toggleCurtain('delay-menu')">Delay</button>
 
         <div class="curtain-menu" id="saturator-menu">
           <p>Saturator Parameters:</p>
@@ -71,7 +71,7 @@
           <br>
           <input type="range" min="0" max="100" value="50"> Feedback
         </div>
-        <button class="effect-button" id="saturator" onmouseover="saturatorinfo()" ondblclick="toggleCurtain('saturator-menu')">Saturator</button>
+        <button id="saturator" onmouseover="saturatorinfo()" ondblclick="toggleCurtain('saturator-menu')">Saturator</button>
         
         <div class="curtain-menu" id="lfo-menu">
           <p>LFO Parameters:</p>
@@ -79,7 +79,7 @@
           <br>
           <input type="range" min="0" max="100" value="50"> Feedback
         </div>
-        <button class="effect-button" id="lfo" onmouseover="lfoinfo()" ondblclick="toggleCurtain('lfo-menu')">LFO</button>
+        <button id="lfo" class="active" onmouseover="lfoinfo()" ondblclick="toggleCurtain('lfo-menu')">LFO</button>
         
       </div>
 

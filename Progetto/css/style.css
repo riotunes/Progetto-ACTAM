@@ -81,22 +81,24 @@ body {
 
 }
 
-.toolbar-button,
-.effect-button {
+button {
   padding: 10px 15px;
   background-color: #282828;
   color: #00ffcc;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  position: relative;
 }
   
-.toolbar-button:hover,
-.effect-button:hover {
-    background-color: #00ffcc;
-    color: #000;
+button:hover {
+  color: #000;
 }
-  
+
+button:active {
+  transform: translateY(2px);
+}
+
 .help-window {
   position: absolute;
   right: 0px; /* Keep aligned with the right edge of the body */
@@ -129,6 +131,7 @@ body {
   width: 25%; /* Set a width for the menu */
 }
 
-.effect-button {
-  position: relative; /* Ensure buttons stay relative for menus */
+.on {
+  background-color: #cc3333;
+  color: #000;
 }
