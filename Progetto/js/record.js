@@ -38,6 +38,7 @@ startstop_function = function() { // è una funzione sola perché il pulsante re
 
 play_function = function() {
     audio.play();
+    play.classList.toggle("on");
 }
 
 record.onclick = startstop_function
