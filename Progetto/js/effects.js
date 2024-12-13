@@ -1,22 +1,16 @@
-// --> per testarle gli ho fatto prendere in input direttamente il microfono
-  
+c = new AudioContext
+
 // DELAY
 
-function delay () {
-  navigator.mediaDevices.getUserMedia({audio: true, video: false}).then(function(stream) {
-  c = new AudioContext();
-  c.resume();
-  const mic = c.createMediaStreamSource(stream);
-  
+function delay_function (sound) {
   const d = c.createDelay();
   d.delayTime.value = 0.5;
   dg = c.createGain();
   dg.gain.value = 0.5;
-  mic.connect(d);
+  sound.connect(d);
   d.connect(dg);
   dg.connect(d);
-  d.connect(c.destination);
-})
+  return d;
 }
 
 // REVERB
@@ -36,17 +30,12 @@ function createImpulse(context, dur, decay) {
   return impulse;
 }
 
-function reverb () {
-  navigator.mediaDevices.getUserMedia({audio: true, video: false}).then(function(stream) {
-  c = new AudioContext();
-  c.resume();
-  const mic = c.createMediaStreamSource(stream);
+function reverb_function (sound) {
   const impulseBuffer = createImpulse(c, 2, 2);
   const r = c.createConvolver();
   r.buffer = impulseBuffer;
-  mic.connect(r);
-  r.connect(c.destination);
-})
+  sound.connect(r);
+  return r;
 }
 
 
@@ -62,35 +51,35 @@ function makeDistortionCurve(g) {
   return curve;
 }
 
-function saturator() {
-   navigator.mediaDevices.getUserMedia({audio: true, video: false}).then(function(stream) {
-  c = new AudioContext();
-  c.resume();
-  const mic = c.createMediaStreamSource(stream);
+function saturation_function(sound) {
   const dist = c.createWaveShaper();
   dist.curve = makeDistortionCurve(500);
   dist.oversample = '4x';
-  mic.connect(dist);
-  dist.connect(c.destination);
-   })
+  sound.connect(dist);
+  return dist;
 }
 
 
 // LFO
 
-
-
-function lfoeffect() {
-navigator.mediaDevices.getUserMedia({audio: true, video: false}).then(function(stream) {
-  c = new AudioContext();
-  c.resume();
-  const mic = c.createMediaStreamSource(stream);
+function lfoeffect_function(sound) {
   lfo = c.createOscillator();
   lfo.frequency.value = 50;
   lfog = c.createGain();
   lfo.start();
-  mic.connect(lfog);
-  lfog.connect(c.destination);
+  sound.connect(lfog);
   lfo.connect(lfog.gain);
-})
+  return lfog;
 }
+
+
+const link_effects = {
+  delay_function,
+  createImpulse,
+  reverb_function,
+  saturation_function,
+  makeDistortionCurve,
+  lfoeffect_function
+};
+
+export default link_effects;
