@@ -1,3 +1,5 @@
+import link_effects from './effects.js';
+
 let mediaRecorder;
 let audioChunks = [];
 let audioUrl;
@@ -13,32 +15,59 @@ navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
         audioChunks.push(event.data);
     };
     mediaRecorder.onstop = () => {
-        const audioBlob = new Blob(audioChunks, {type: 'audio/wav' });
+        const audioBlob = new Blob(audioChunks, {type: 'audio/wav' }); // che è un blob non l'ho ancora capito bene vabbè
         audioUrl = URL.createObjectURL(audioBlob);
-        audio = new Audio(audioUrl);
+        fetch(audioUrl)
+        .then(response => response.arrayBuffer())
+        .then(arrayBuffer => c.decodeAudioData(arrayBuffer))
+        .then(buffer => {
+            audioBuffer = buffer; // a quanto pare bisogna fare un buffer per l'audio registrato
+        });
         audioChunks = [];
     }
 });
 
-startstop_function = function() { // è una funzione sola perché il pulsante rec avvia e ferma la registrazione
+// funzione per la registrazione
+startstop_function = function() {
     if(!started) {
         mediaRecorder.start();
         started = true;
-        record.classList.toggle("on");    // non so come si chiamerà la classe dei pulsanti accesi, per ora l'ho chiamata on
-        document.getElementById("help-window").innerHTML = "recording...";    // questo non funziona, credo non si possa cambiare l'innerHTML perché c'è già il mouseover
+      document.getElementById("help-window").innerHTML = "recording...";
     }
     else {
         mediaRecorder.stop();
         started = false;
-        record.classList.toggle("on");
-        document.getElementById("help-window").innerHTML = "audio recorded!";   // idem
+      document.getElementById("help-window").innerHTML = "audio recorded!";
     }
     
 }
 
+
+const effectButtons = document.querySelectorAll('#reverb, #delay, #saturator, #lfo');
+
+// funzione per riprodurre l'audio a seconda degli effetti selezionati
 play_function = function() {
-    audio.play();
-    play.classList.toggle("on");
+    source = c.createBufferSource();
+    source.buffer = audioBuffer;
+    let lastNode = source;
+    effectButtons.forEach(effectButton => {
+        if(effectButton.classList.contains('on')) {
+             if(effectButton.id === 'delay'){
+                lastNode = delay_function(lastNode);
+            }
+            if(effectButton.id === 'reverb'){
+                lastNode = reverb_function(lastNode);
+            }
+            if(effectButton.id === 'saturator'){
+                lastNode = saturation_function(lastNode);
+            }
+            if(effectButton.id === 'lfo') {
+                lastNode = lfoeffect_function(lastNode);
+            }
+        }
+    })
+    lastNode.connect(c.destination); // se tutti gli effetti sono spenti riproduce il segnale originale
+    source.start();
 }
 
 record.onclick = startstop_function
