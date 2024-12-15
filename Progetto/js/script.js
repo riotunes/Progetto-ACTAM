@@ -71,14 +71,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // EFFECTS
 
-c = new AudioContext
+const c = new (window.AudioContext || window.webkitAudioContext)();
 
 // DELAY
 
 function delay_function(sound) {
   const d = c.createDelay();
   d.delayTime.value = 0.5; // PAR
-  dg = c.createGain();
+  const dg = c.createGain();
   dg.gain.value = 0.5; // PAR
   sound.connect(d);
   d.connect(dg);
@@ -138,9 +138,9 @@ function saturation_function(sound) {
 
 
 function lfoeffect_function(sound) {
-  lfo = c.createOscillator();
+  const lfo = c.createOscillator();
   lfo.frequency.value = 50; // PAR
-  lfog = c.createGain();
+  const lfog = c.createGain();
   lfo.start();
   sound.connect(lfog);
   lfo.connect(lfog.gain);
@@ -187,7 +187,7 @@ startstop_function = function() {
     else {
         mediaRecorder.stop();
         started = false;
-        document.getElementById("help-window").innerHTML = audio recorded!";
+        document.getElementById("help-window").innerHTML = "audio recorded!";
     }
     
 }
@@ -205,7 +205,7 @@ play_function = function() {
     effectButtons.forEach(effectButton => {
         if(effectButton.classList.contains('on')) {
              if(effectButton.id === 'delay'){
-                lastNode = delay_functionlastNode);
+                lastNode = delay_function(lastNode);
             }
             else if(effectButton.id === 'reverb'){
                 lastNode = reverb_function(lastNode);
