@@ -224,10 +224,3 @@ play_function = function() {
 
 record.onclick = startstop_function
 play.onclick = play_function
-
-// attiva i pulsanti degli effetti quando ci clicchi
-effectButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        button.classList.toggle('on');
-    })
-})
