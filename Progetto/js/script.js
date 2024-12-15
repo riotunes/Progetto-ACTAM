@@ -67,3 +67,167 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+
+// EFFECTS
+
+c = new AudioContext
+
+// DELAY
+
+function delay_function(sound) {
+  const d = c.createDelay();
+  d.delayTime.value = 0.5; // PAR
+  dg = c.createGain();
+  dg.gain.value = 0.5; // PAR
+  sound.connect(d);
+  d.connect(dg);
+  dg.connect(d);
+  return d;
+}
+
+// REVERB
+
+function createImpulse(context, dur, decay) { // PAR 1 E 2
+  const sampleRate = context.sampleRate;
+  const length = sampleRate * dur;
+  const impulse = context.createBuffer(2, length, sampleRate);
+  const impulseL = impulse.getChannelData(0);
+  const impulseR = impulse.getChannelData(1);
+  
+  for (let i = 0; i < length; i++) {
+    const n = length - i;
+    impulseL[i] = (Math.random() * 2 - 1) * Math.pow(n / length, decay);
+    impulseR[i] = (Math.random() * 2 - 1) * Math.pow(n / length, decay);
+  }
+  return impulse;
+}
+
+function reverb_function(sound) {
+  const impulseBuffer = createImpulse(c, 2, 2);
+  const r = c.createConvolver();
+  r.buffer = impulseBuffer;
+  sound.connect(r);
+  return r;
+}
+
+
+// SATURATION
+
+function makeDistortionCurve(g) { // PAR
+  const samples = 44100;  // std
+  const curve = new Float32Array(samples);
+  for (let i = 0; i < samples; i++) {
+    const x = i * 2 / samples - 1;
+    curve[i] = ((3 + g) * x * 20 * (Math.PI / 180)) / (Math.PI + g + Math.abs(x));
+  }
+  return curve;
+}
+
+function saturation_function(sound) {
+  const dist = c.createWaveShaper();
+  dist.curve = makeDistortionCurve(500);
+  dist.oversample = '4x'; // PAR
+  sound.connect(dist);
+  return dist;
+}
+
+
+// LFO
+
+
+
+function lfoeffect_function(sound) {
+  lfo = c.createOscillator();
+  lfo.frequency.value = 50; // PAR
+  lfog = c.createGain();
+  lfo.start();
+  sound.connect(lfog);
+  lfo.connect(lfog.gain);
+  return lfog;
+}
+
+
+// RECORD
+
+let mediaRecorder;
+let audioChunks = [];
+let audioUrl;
+let started = false; // serve perché il pulsante rec fa sia start che stop
+
+const record = document.getElementById('record');
+const play = document.getElementById('play')
+let audio
+c = new AudioContext // globale perché serve un po' a tutte le funzioni
+
+navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+    mediaRecorder = new MediaRecorder(stream);
+    mediaRecorder.ondataavailable = event => {
+        audioChunks.push(event.data);
+    };
+    mediaRecorder.onstop = () => {
+        const audioBlob = new Blob(audioChunks, {type: 'audio/wav' }); // che è un blob non l'ho ancora capito
+        audioUrl = URL.createObjectURL(audioBlob);
+        fetch(audioUrl)
+        .then(response => response.arrayBuffer())
+        .then(arrayBuffer => c.decodeAudioData(arrayBuffer))
+        .then(buffer => {
+            audioBuffer = buffer; // a quanto pare bisogna fare un buffer per l'audio registrato
+        });
+        audioChunks = [];
+    }
+});
+
+// funzione per la registrazione
+startstop_function = function() {
+    if(!started) {
+        mediaRecorder.start();
+        started = true;
+    }
+    else {
+        mediaRecorder.stop();
+        started = false;
+    }
+    
+}
+
+
+const effectButtons = document.querySelectorAll('#reverb, #delay, #saturator, #lfo');
+
+
+// funzione per riprodurre, a seconda degli effetti selezionati
+play_function = function() {
+    source = c.createBufferSource();
+    source.buffer = audioBuffer;
+  
+    let lastNode = source;
+    effectButtons.forEach(effectButton => {
+        if(effectButton.classList.contains('on')) {
+             if(effectButton.id === 'delay'){
+                lastNode = delay(lastNode);
+            }
+            if(effectButton.id === 'reverb'){
+                lastNode = reverb(lastNode);
+            }
+            if(effectButton.id === 'saturator'){
+                lastNode = saturation(lastNode);
+            }
+            if(effectButton.id === 'lfo') {
+                lastNode = lfoeffect(lastNode);
+            }
+        }
+    })
+    lastNode.connect(c.destination); // se tutti gli effetti sono spenti riproduce il segnale originale
+    source.start();
+}
+
+
+record.onclick = startstop_function
+play.onclick = play_function
+
+// attiva i pulsanti degli effetti quando ci clicchi
+effectButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        button.classList.toggle('on');
+    })
+})
