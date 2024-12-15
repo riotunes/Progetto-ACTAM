@@ -152,6 +152,7 @@ function lfoeffect_function(sound) {
 
 let mediaRecorder;
 let audioChunks = [];
+let audioBuffer;
 let audioUrl;
 let started = false; // serve perché il pulsante rec fa sia start che stop
 
