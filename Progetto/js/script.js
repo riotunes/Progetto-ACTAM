@@ -158,7 +158,6 @@ let started = false; // serve perché il pulsante rec fa sia start che stop
 const record = document.getElementById('record');
 const play = document.getElementById('play')
 let audio
-c = new AudioContext // globale perché serve un po' a tutte le funzioni
 
 navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
     mediaRecorder = new MediaRecorder(stream);
