@@ -1,5 +1,3 @@
-import link_effects from './effects.js';
-
 let mediaRecorder;
 let audioChunks = [];
 let audioUrl;
