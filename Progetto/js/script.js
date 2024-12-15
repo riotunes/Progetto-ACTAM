@@ -182,10 +182,12 @@ startstop_function = function() {
     if(!started) {
         mediaRecorder.start();
         started = true;
+        document.getElementById("help-window").innerHTML = "recording...";
     }
     else {
         mediaRecorder.stop();
         started = false;
+        document.getElementById("help-window").innerHTML = audio recorded!";
     }
     
 }
@@ -203,16 +205,16 @@ play_function = function() {
     effectButtons.forEach(effectButton => {
         if(effectButton.classList.contains('on')) {
              if(effectButton.id === 'delay'){
-                lastNode = delay(lastNode);
+                lastNode = delay_functionlastNode);
             }
-            if(effectButton.id === 'reverb'){
-                lastNode = reverb(lastNode);
+            else if(effectButton.id === 'reverb'){
+                lastNode = reverb_function(lastNode);
             }
-            if(effectButton.id === 'saturator'){
-                lastNode = saturation(lastNode);
+            else if(effectButton.id === 'saturator'){
+                lastNode = saturation_function(lastNode);
             }
-            if(effectButton.id === 'lfo') {
-                lastNode = lfoeffect(lastNode);
+            else if(effectButton.id === 'lfo') {
+                lastNode = lfoeffect_function(lastNode);
             }
         }
     })
