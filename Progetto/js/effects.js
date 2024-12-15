@@ -71,15 +71,3 @@ function lfoeffect_function(sound) {
   lfo.connect(lfog.gain);
   return lfog;
 }
-
-
-const link_effects = {
-  delay_function,
-  createImpulse,
-  reverb_function,
-  saturation_function,
-  makeDistortionCurve,
-  lfoeffect_function
-};
-
-export default link_effects;
