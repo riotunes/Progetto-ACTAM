@@ -157,8 +157,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let audioUrl;
   let started = false; // serve perché il pulsante rec fa sia start che stop
 
-  const record = document.getElementById('record');
-  const play = document.getElementById('play');
+  const recordButton = document.getElementById('record');
+  const playButton = document.getElementById('play');
   let audio;
 
   navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
@@ -181,19 +181,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const effectButtons = document.querySelectorAll('#reverb, #delay, #saturator, #lfo');
 
   // funzione per riprodurre, a seconda degli effetti selezionati
-  function startstop_function() {
-    if(!started) {
+  function startstop_function(event) {
+
+    button = event.target
+    if(!button.recordingStated) {
         mediaRecorder.start();
-        started = true;
+        button.recordingStated = true;
         document.getElementById("help-window").innerHTML = "recording...";
     }
     else {
         mediaRecorder.stop();
-        started = false;
+        button.recordingStated = false;
         document.getElementById("help-window").innerHTML = "audio recorded!";
     }
-  }  
-  record.onclick = startstop_function
+  }
+  recordButton.recordingStated = false
+  recordButton.onclick = startstop_function
 
   // funzione per la registrazione
   function play_function() {
