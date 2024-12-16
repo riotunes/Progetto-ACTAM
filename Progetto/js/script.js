@@ -150,36 +150,38 @@ function lfoeffect_function(sound) {
 
 // RECORD
 
-let mediaRecorder;
-let audioChunks = [];
-let audioBuffer;
-let audioUrl;
-let started = false; // serve perché il pulsante rec fa sia start che stop
+document.addEventListener('DOMContentLoaded', () => {
+  let mediaRecorder;
+  let audioChunks = [];
+  let audioBuffer;
+  let audioUrl;
+  let started = false; // serve perché il pulsante rec fa sia start che stop
 
-const record = document.getElementById('record');
-const play = document.getElementById('play')
-let audio
+  const record = document.getElementById('record');
+  const play = document.getElementById('play');
+  let audio;
 
-navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
-    mediaRecorder = new MediaRecorder(stream);
-    mediaRecorder.ondataavailable = event => {
-        audioChunks.push(event.data);
-    };
-    mediaRecorder.onstop = () => {
-        const audioBlob = new Blob(audioChunks, {type: 'audio/wav' }); // che è un blob non l'ho ancora capito
-        audioUrl = URL.createObjectURL(audioBlob);
-        fetch(audioUrl)
-        .then(response => response.arrayBuffer())
-        .then(arrayBuffer => c.decodeAudioData(arrayBuffer))
-        .then(buffer => {
-            audioBuffer = buffer; // a quanto pare bisogna fare un buffer per l'audio registrato
-        });
-        audioChunks = [];
-    }
-});
+  navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+      mediaRecorder = new MediaRecorder(stream);
+      mediaRecorder.ondataavailable = event => {
+          audioChunks.push(event.data);
+      };
+      mediaRecorder.onstop = () => {
+          const audioBlob = new Blob(audioChunks, {type: 'audio/wav' }); // che è un blob non l'ho ancora capito
+          audioUrl = URL.createObjectURL(audioBlob);
+          fetch(audioUrl)
+          .then(response => response.arrayBuffer())
+          .then(arrayBuffer => c.decodeAudioData(arrayBuffer))
+          .then(buffer => {
+              audioBuffer = buffer; // a quanto pare bisogna fare un buffer per l'audio registrato
+          });
+          audioChunks = [];
+      }
+  });
+  const effectButtons = document.querySelectorAll('#reverb, #delay, #saturator, #lfo');
 
-// funzione per la registrazione
-startstop_function = function() {
+  // funzione per riprodurre, a seconda degli effetti selezionati
+  function startstop_function() {
     if(!started) {
         mediaRecorder.start();
         started = true;
@@ -190,15 +192,11 @@ startstop_function = function() {
         started = false;
         document.getElementById("help-window").innerHTML = "audio recorded!";
     }
-    
-}
+  }  
+  record.onclick = startstop_function
 
-
-const effectButtons = document.querySelectorAll('#reverb, #delay, #saturator, #lfo');
-
-
-// funzione per riprodurre, a seconda degli effetti selezionati
-play_function = function() {
+  // funzione per la registrazione
+  function play_function() {
     source = c.createBufferSource();
     source.buffer = audioBuffer;
   
@@ -221,8 +219,6 @@ play_function = function() {
     })
     lastNode.connect(c.destination); // se tutti gli effetti sono spenti riproduce il segnale originale
     source.start();
-}
-
-
-record.onclick = startstop_function
-play.onclick = play_function
+  }
+  play.onclick = play_function
+})
