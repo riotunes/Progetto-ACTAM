@@ -51,32 +51,28 @@
         <button id="reverb" onmouseover="reverbinfo()" ondblclick="toggleCurtain('reverb-menu')">Reverb</button>
         <div class="curtain-menu" id="reverb-menu">
           <p>Reverb Parameters:</p>
-          <input type="range" min="0" max="100" value="50"> Depth
+          <input type="range" min="0" max="10" value="2" step="0.1" oninput="dur = Number(this.value)"> Duration
           <br>
-          <input type="range" min="0" max="10" value="5"> Time
+          <input type="range" min="0" max="10" value="2" step="0.1" oninput="decay = Number(this.value)"> Decay
         </div>
 
         <div class="curtain-menu" id="delay-menu">
           <p>Delay Parameters:</p>
-          <input type="range" min="0" max="500" value="250"> Time
+          <input type="range" min="0" max="2" value="1" step="0.1" oninput="delay_par1 = Number(this.value)"> Delay time
           <br>
-          <input type="range" min="0" max="100" value="50"> Feedback
+          <input type="range" min="0" max="0.9" value="0.5" step="0.1" oninput="delay_par2 = Number(this.value)"> Damping
         </div>
         <button id="delay" onmouseover="delayinfo()" ondblclick="toggleCurtain('delay-menu')">Delay</button>
 
         <div class="curtain-menu" id="saturator-menu">
           <p>Saturator Parameters:</p>
-          <input type="range" min="0" max="500" value="250"> Frequency
-          <br>
-          <input type="range" min="0" max="100" value="50"> Feedback
-        </div>
+          <input type="range" min="0" max="500" value="250" oninput="g = Number(this.value)"> Gain
+          </div>
         <button id="saturator" onmouseover="saturatorinfo()" ondblclick="toggleCurtain('saturator-menu')">Saturator</button>
         
         <div class="curtain-menu" id="lfo-menu">
           <p>LFO Parameters:</p>
-          <input type="range" min="0" max="500" value="250"> Frequency
-          <br>
-          <input type="range" min="0" max="100" value="50"> Feedback
+          <input type="range" min="0" max="100" value="50" step="1" oninput="lfo_par1 = Number(this.value)"> Frequency
         </div>
         <button id="lfo" class="active" onmouseover="lfoinfo()" ondblclick="toggleCurtain('lfo-menu')">LFO</button>
         

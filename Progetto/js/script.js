@@ -72,14 +72,17 @@ document.addEventListener('DOMContentLoaded', () => {
 // EFFECTS
 
 const c = new (window.AudioContext || window.webkitAudioContext)();
-
+let delay_par1 = 0.5, delay_par2 = 0.5;
+let dur = 2, decay = 2;
+let g = 250;
+let lfo_par1 = 50;
 // DELAY
 
 function delay_function(sound) {
   const d = c.createDelay();
-  d.delayTime.value = 0.5; // PAR
+  d.delayTime.value = delay_par1; // PAR
   const dg = c.createGain();
-  dg.gain.value = 0.5; // PAR
+  dg.gain.value = delay_par2; // PAR
   sound.connect(d);
   d.connect(dg);
   dg.connect(d);
@@ -104,7 +107,7 @@ function createImpulse(context, dur, decay) { // PAR 1 E 2
 }
 
 function reverb_function(sound) {
-  const impulseBuffer = createImpulse(c, 2, 2);
+  const impulseBuffer = createImpulse(c, dur, decay);
   const r = c.createConvolver();
   r.buffer = impulseBuffer;
   sound.connect(r);
@@ -119,14 +122,14 @@ function makeDistortionCurve(g) { // PAR
   const curve = new Float32Array(samples);
   for (let i = 0; i < samples; i++) {
     const x = i * 2 / samples - 1;
-    curve[i] = ((3 + g) * x * 20 * (Math.PI / 180)) / (Math.PI + g + Math.abs(x));
+    curve[i] = ((3 + g) * x * 20 * (Math.PI / 180)) / (Math.PI + g * Math.abs(x));
   }
   return curve;
 }
 
 function saturation_function(sound) {
   const dist = c.createWaveShaper();
-  dist.curve = makeDistortionCurve(500);
+  dist.curve = makeDistortionCurve(g);
   dist.oversample = '4x'; // PAR
   sound.connect(dist);
   return dist;
@@ -139,7 +142,7 @@ function saturation_function(sound) {
 
 function lfoeffect_function(sound) {
   const lfo = c.createOscillator();
-  lfo.frequency.value = 50; // PAR
+  lfo.frequency.value = lfo_par1; // PAR
   const lfog = c.createGain();
   lfo.start();
   sound.connect(lfog);
@@ -159,7 +162,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const recordButton = document.getElementById('record');
   const playButton = document.getElementById('play');
+  const stopButton = document.getElementById('stop');
   let audio;
+  let startTime;
+  let currentTime = 0;
 
   navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
       mediaRecorder = new MediaRecorder(stream);
@@ -221,7 +227,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
     lastNode.connect(c.destination); // se tutti gli effetti sono spenti riproduce il segnale originale
-    source.start();
+    
+    if (currentTime >= audioBuffer.duration) {
+      currentTime = 0; 
+    }
+
+    startTime = c.currentTime - currentTime; // tempo d'inizio è tempo attuale assoluto - tempo attuale di riproduzione
+    source.start(0, currentTime);
   }
-  play.onclick = play_function
+
+  function pause_function() {
+    currentTime += c.currentTime - startTime;
+    source.stop();
+  }
+  
+    playButton.onclick = play_function;
+    stopButton.onclick = pause_function;
 })
