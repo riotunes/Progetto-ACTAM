@@ -3,18 +3,96 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Antoprova</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+  <title>PicTune</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/script.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
   <div class="app-container">
+    <!-- Top section: Title and Navigation Bar -->
     <header class="top-section">
-      <h1 class="app-title">SoundNebula7</h1>
+      <h1 class="app-title">PicTune</h1>
+      <nav class="navbar">
+        <a href="main.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contacts.html">Contacts</a>
+      </nav>
     </header>
+
+    <!-- Central section: Graphical Representations -->
     <main class="central-section">
-      <canvas id="visualizer"></canvas>
+      <div class="graphics-display">
+        <canvas id="visualizer"></canvas>
+      </div>
     </main>
+
+    <!-- Bottom section: Toolbar -->
+    <footer class="bottom-section">
+      <div class="main-toolbar">
+        <button id="record" onmouseover="recordinfo()">
+          <i class="fa-solid fa-circle-dot"></i>
+        </button>
+        <button id="play" onmouseover="playinfo()">
+          <i class="fas fa-play"></i>
+        </button>
+        <button id="stop" onmouseover="stopinfo()">
+          <i class="fas fa-pause"></i>
+        </button>
+        <button id="settings" onmouseover="settingsinfo()" ondblclick="toggleCurtain('settings-menu')">
+          <i class="fas fa-cog"></i>
+        </button>
+        <div class="curtain-menu" id="settings-menu">
+          <p>Select Input:</p>
+          <label>
+            <input type="radio" name="input" value="midi" id="midi-input"> MIDI Input
+          </label>
+          <br>
+          <label>
+            <input type="radio" name="input" value="microphone" id="mic-input"> Microphone Input
+          </label>
+          <br>
+          <button onclick="applySettings()">Apply</button>
+        </div>
+        <button id="export" onmouseover="exportinfo()">
+          <i class="fa-solid fa-share-from-square"></i>
+        </button>
+      </div>
+
+      <div class="effects-toolbar">
+        <button id="reverb" onmouseover="reverbinfo()" ondblclick="toggleCurtain('reverb-menu')">Reverb</button>
+        <div class="curtain-menu" id="reverb-menu">
+          <p>Reverb Parameters:</p>
+          <input type="range" min="0" max="10" value="2" step="0.1" oninput="dur = Number(this.value)"> Duration
+          <br>
+          <input type="range" min="0" max="10" value="2" step="0.1" oninput="decay = Number(this.value)"> Decay
+        </div>
+
+        <div class="curtain-menu" id="delay-menu">
+          <p>Delay Parameters:</p>
+          <input type="range" min="0" max="2" value="1" step="0.1" oninput="delay_par1 = Number(this.value)"> Delay time
+          <br>
+          <input type="range" min="0.7" max="0" value="0.5" step="0.1" oninput="delay_par2 = Number(this.value)"> Damping
+        </div>
+        <button id="delay" onmouseover="delayinfo()" ondblclick="toggleCurtain('delay-menu')">Delay</button>
+
+        <div class="curtain-menu" id="saturator-menu">
+          <p>Saturator Parameters:</p>
+          <input type="range" min="0" max="500" value="250" oninput="g = Number(this.value)"> Gain
+        </div>
+        <button id="saturator" onmouseover="saturatorinfo()" ondblclick="toggleCurtain('saturator-menu')">Saturator</button>
+        
+        <div class="curtain-menu" id="lfo-menu">
+          <p>LFO Parameters:</p>
+          <input type="range" min="0" max="100" value="50" step="1" oninput="lfo_par1 = Number(this.value)"> Frequency
+        </div>
+        <button id="lfo" class="active" onmouseover="lfoinfo()" ondblclick="toggleCurtain('lfo-menu')">LFO</button>
+      </div>
+
+      <div class="help-window" id="help-window">
+        Hover over a button for help!
+      </div>
+    </footer>
   </div>
 </body>
 </html>
