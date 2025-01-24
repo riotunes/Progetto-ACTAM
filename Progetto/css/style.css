@@ -1,5 +1,5 @@
 /* styles.css */
-
+/* MAIN */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -175,4 +175,49 @@ button:active {
 .on {
   background-color: #cc3333;
   color: #000;
+}
+
+/* CONTACTS */
+.contacts-container {
+  padding: 40px 20px;
+  background-color: #1f1f1f; /* Matches the site's dark theme */
+  color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+  margin: 20px auto;
+  max-width: 800px; /* Center and limit the width */
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2em;
+  color: #00ffcc; /* Matches the accent color of the site */
+  margin-bottom: 20px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Subtle text shadow */
+}
+
+.contacts-description {
+  font-size: 1.2em;
+  line-height: 1.8;
+  margin-bottom: 30px;
+}
+
+.contacts-list {
+  list-style: none; /* Remove bullets */
+  padding: 0;
+}
+
+.contacts-list li {
+  margin: 10px 0;
+}
+
+.contacts-list a {
+  color: #00ffcc; /* Accent color for links */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.contacts-list a:hover {
+  text-decoration: underline;
+  color: #009977; /* Slightly darker shade for hover */
 }
