@@ -78,6 +78,19 @@ document.addEventListener('click', (event) => {
   }
 });
 
+//Arming buttons
+document.addEventListener('DOMContentLoaded', () => {
+
+// Select all buttons with the 'on' toggling behavior
+const toggleButtons = document.querySelectorAll('#record, #reverb, #delay, #saturator, #lfo');	
+  // Add click event listeners to toggle the "on" class	
+  toggleButtons.forEach(button => {
+      button.addEventListener('click', () => {
+          button.classList.toggle('on'); // Add or remove the "on" class
+      });
+  });
+});
+
 
 
 // EFFECTS
