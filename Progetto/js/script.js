@@ -8,7 +8,7 @@ function stopinfo() {
   document.getElementById("help-window").innerHTML = "This is the stop button! Press it to stop the replay of your recording!";
 }
 function settingsinfo() {
-  document.getElementById("help-window").innerHTML = "This is the settings button! Press it to access the setting menu and choose your audio input!";
+  document.getElementById("help-window").innerHTML = "This is the settings button! Double click it to access the setting menu and choose your audio input!";
 }
 function exportinfo() {
   document.getElementById("help-window").innerHTML = "This is the export button! Press it to export the sounds you recorded and share them with the world!";
@@ -28,11 +28,12 @@ function lfoinfo() {
 
 
 // Keep track of the currently open menu
+// Keep track of the currently open menu
 let openMenu = null;
 
 function toggleCurtain(menuId) {
   const menu = document.getElementById(menuId);
-  
+
   // Close any previously open menu
   if (openMenu && openMenu !== menu) {
     openMenu.style.display = 'none';
@@ -48,6 +49,27 @@ function toggleCurtain(menuId) {
   }
 }
 
+// Apply settings logic
+function applySettings() {
+  const midiInput = document.getElementById('midi-input').checked;
+  const micInput = document.getElementById('mic-input').checked;
+
+  if (midiInput) {
+    console.log('MIDI input selected');
+    alert('MIDI input selected');
+  } else if (micInput) {
+    console.log('Microphone input selected');
+    alert('Microphone input selected');
+  } else {
+    alert('Please select an input method!');
+  }
+
+  // Close the settings menu
+  const settingsMenu = document.getElementById('settings-menu');
+  settingsMenu.style.display = 'none';
+  openMenu = null;
+}
+
 // Close the menu if clicking outside
 document.addEventListener('click', (event) => {
   if (openMenu && !openMenu.contains(event.target) && !event.target.matches('.effect-button')) {
@@ -56,17 +78,6 @@ document.addEventListener('click', (event) => {
   }
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-  // Select all buttons with the 'on' toggling behavior
-  const toggleButtons = document.querySelectorAll('#record, #reverb, #delay, #saturator, #lfo');
-
-  // Add click event listeners to toggle the "on" class
-  toggleButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      button.classList.toggle('on'); // Add or remove the "on" class
-    });
-  });
-});
 
 
 // EFFECTS

@@ -14,9 +14,9 @@
     <header class="top-section">
       <h1 class="app-title">PicTune</h1>
       <nav class="navbar">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+        <a href="main.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contacts.html">Contacts</a>
       </nav>
     </header>
 
@@ -39,9 +39,21 @@
         <button id="stop" onmouseover="stopinfo()">
           <i class="fas fa-pause"></i>
         </button>
-        <button id="settings" onmouseover="settingsinfo()">
+        <button id="settings" onmouseover="settingsinfo()" ondblclick="toggleCurtain('settings-menu')">
           <i class="fas fa-cog"></i>
         </button>
+        <div class="curtain-menu" id="settings-menu">
+          <p>Select Input:</p>
+          <label>
+            <input type="radio" name="input" value="midi" id="midi-input"> MIDI Input
+          </label>
+          <br>
+          <label>
+            <input type="radio" name="input" value="microphone" id="mic-input"> Microphone Input
+          </label>
+          <br>
+          <button onclick="applySettings()">Apply</button>
+        </div>
         <button id="export" onmouseover="exportinfo()">
           <i class="fa-solid fa-share-from-square"></i>
         </button>
