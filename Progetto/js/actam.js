@@ -1,3 +1,4 @@
+// RISPOSTA GRAFICA
 document.addEventListener("DOMContentLoaded", () => {
   const canvas = document.getElementById("visualizer") // Canvas dove disegniamo
   const ctx = canvas.getContext("2d") 
@@ -143,6 +144,11 @@ document.addEventListener("DOMContentLoaded", () => {
   })
 })
 
+
+
+
+
+
 //INTERFACCIA
 
 function recordinfo() {
@@ -174,7 +180,7 @@ function lfoinfo() {
 }
 
 
-// Keep track of the currently open menu
+//Menù a comparsa
 // Keep track of the currently open menu
 let openMenu = null;
 
@@ -205,7 +211,7 @@ function applySettings() {
     console.log('MIDI input selected');
     alert('MIDI input selected');
   } else if (micInput) {
-    console.log('Microphone input selected');
+    console.log('Audio input selected');
     alert('Microphone input selected');
   } else {
     alert('Please select an input method!');
@@ -237,6 +243,11 @@ const toggleButtons = document.querySelectorAll('#record, #reverb, #delay, #satu
       });
   });
 });
+
+
+
+
+
 
 // EFFECTS
 
