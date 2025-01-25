@@ -59,7 +59,7 @@ function applySettings() {
     alert('MIDI input selected');
   } else if (micInput) {
     console.log('Microphone input selected');
-    alert('Microphone input selected');
+    alert('Audio input selected');
   } else {
     alert('Please select an input method!');
   }
