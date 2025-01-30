@@ -3,9 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PicTune - Home</title>
-  <link rel="stylesheet" href="../css/actam.css">
-  <script src="../js/actam.js" defer></script>
+  <title>PicTune -  Home</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/visuals.js" defer></script>
+  <script src="../js/script.js" defer></script>
+  <script src="../js/mic.js" defer></script>
+  <script src="../js/midi.js" defer></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
 </head>
@@ -15,7 +18,7 @@
     <header class="top-section">
       <h1 class="app-title">PicTune</h1>
       <nav class="navbar">
-        <a href="actam.html">Home</a>
+        <a href="main.html">Home</a>
         <a href="about.html">About</a>
         <a href="contacts.html">Contacts</a>
       </nav>
@@ -24,7 +27,7 @@
     <!-- Central section: Graphical Representations -->
     <main class="central-section">
       <div class="graphics-display">
-        <p>This is where the magic happens baby ;) <br> (not for now tho)</p>
+        <canvas id="visualizer"></canvas>
       </div>
     </main>
 
@@ -80,7 +83,7 @@
         <div class="curtain-menu" id="saturator-menu">
           <p>Saturator Parameters:</p>
           <input type="range" min="0" max="500" value="250" oninput="g = Number(this.value)"> Gain
-          </div>
+        </div>
         <button id="saturator" onmouseover="saturatorinfo()" ondblclick="toggleCurtain('saturator-menu')">Saturator</button>
         
         <div class="curtain-menu" id="lfo-menu">
@@ -88,7 +91,6 @@
           <input type="range" min="0" max="100" value="50" step="1" oninput="lfo_par1 = Number(this.value)"> Frequency
         </div>
         <button id="lfo" class="active" onmouseover="lfoinfo()" ondblclick="toggleCurtain('lfo-menu')">LFO</button>
-        
       </div>
 
       <div class="help-window" id="help-window">
@@ -96,6 +98,5 @@
       </div>
     </footer>
   </div>
-  
 </body>
 </html>
