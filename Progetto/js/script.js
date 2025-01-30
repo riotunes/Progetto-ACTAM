@@ -60,9 +60,11 @@ function applySettings() {
   if (midiInput) {
     console.log('MIDI input selected');
     alert('MIDI input selected');
+    playMIDI();
   } else if (micInput) {
     console.log('Microphone input selected');
     alert('Audio input selected');
+    playMic();
   } else {
     alert('Please select an input method!');
   }

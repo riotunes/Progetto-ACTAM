@@ -1,8 +1,6 @@
 // RECORD
 
-let lastNode // è la variabile con cui tutti i js comunicano tra di loro
-
-document.addEventListener('DOMContentLoaded', () => {
+function playMic() {
     let mediaRecorder;
     let audioChunks = [];
     let audioBuffer;
@@ -92,4 +90,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
       playButton.onclick = play_function;
       stopButton.onclick = pause_function;
-  })
+}
