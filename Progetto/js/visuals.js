@@ -20,7 +20,7 @@ function visualizeSound(node) {
   const dataArray = new Uint8Array(bufferLength) // Dati del segnale audio attuale
   const prevDataArray = new Uint8Array(bufferLength) // Dati del segnale audio precedente (per confronti)
 
-  let timeElapsed = 0 // Contatore del tempo passato
+  let timeElapsed = 0 // Contatore del tempo passato 
 
   // Classe delle palle
   class Particle {

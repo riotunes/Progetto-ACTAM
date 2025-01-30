@@ -1,4 +1,4 @@
-// INPUT MIDI DA TASTIERA
+// INPUT: MIDI DA TASTIERA
 
 function playMIDI() {
     if (navigator.requestMIDIAccess) {
@@ -59,7 +59,7 @@ function playMIDI() {
             }
         })
         lastNode.connect(c.destination);
-        o.start();
-        visualizeSound(node);
+        visualizeSound(lastNode);
     }
+    o.start();
 }

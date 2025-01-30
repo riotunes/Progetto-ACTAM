@@ -1,4 +1,4 @@
-// RECORD
+// INPUT: MICROFONO
 
 function playMic() {
     let mediaRecorder;
