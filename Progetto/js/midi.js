@@ -1,3 +1,5 @@
+// INPUT MIDI DA TASTIERA
+
 document.addEventListener('DOMContentLoaded', () => {
     if (navigator.requestMIDIAccess) {
         navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
@@ -57,6 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         })
         lastNode.connect(c.destination);
-        o.start()
+        o.start();
+        visualizeSound(node);
     }
 });
