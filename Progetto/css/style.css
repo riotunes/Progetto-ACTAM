@@ -229,3 +229,47 @@ button:active {
   text-decoration: underline;
   color: #009977; /* Slightly darker shade for hover */
 }
+
+/* About Page Container */
+.about-container {
+  padding: 40px 20px;
+  background-color: #1f1f1f; /* Matches the site's dark theme */
+  color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+  margin: 20px auto;
+  max-width: 800px; /* Center content */
+  text-align: center;
+}
+
+/* Section Title */
+.section-title {
+  font-size: 2em;
+  color: #00ffcc; /* Matches the accent color */
+  margin-bottom: 20px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Section Title */
+.section-subtitle {
+  font-size: 1.4em;
+  color: #00ffcc; /* Matches the accent color */
+  margin-bottom: 20px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* About Page Image */
+.about-image {
+  width: 60%;
+  height: auto;
+  border-radius: 8px;
+  margin: 20px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Soft shadow */
+}
+
+/* About Text */
+.about-text {
+  font-size: 1.2em;
+  line-height: 1.8;
+  margin-bottom: 30px;
+}
