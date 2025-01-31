@@ -238,7 +238,18 @@ button:active {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow */
   margin: 20px auto;
-  max-width: 800px; /* Center content */
+  max-width: 70%; /* Center content */
+  text-align: center;
+}
+
+.about-subcontainer {
+  padding: 40px 20px;
+  background-color: #1f1f1f; /* Matches the site's dark theme */
+  color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 1); /* Subtle shadow */
+  margin: 20px auto;
+  max-width: 15%; /* Center content */
   text-align: center;
 }
 
