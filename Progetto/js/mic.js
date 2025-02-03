@@ -81,7 +81,7 @@ function playMic() {
   
       startTime = c.currentTime - currentTime; // tempo d'inizio è tempo attuale assoluto - tempo attuale di riproduzione
       source.start(0, currentTime);
-      visualizeSound(lastNode);
+      visualizeSound(lastNode, 10);
     }
   
     function pause_function() {

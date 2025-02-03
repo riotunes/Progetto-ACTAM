@@ -1,4 +1,4 @@
-function visualizeSound(node) {
+function visualizeSound(node, nPalle) {
   // === Canvas Setup ===
   const canvas = document.getElementById("visualizer");
   const ctx = canvas.getContext("2d");
@@ -84,7 +84,7 @@ function visualizeSound(node) {
 
   // === Particle Initialization ===
   const particles = [];
-  const particleCount = 1;
+  const particleCount = nPalle;
   const createParticle = () => {
     const x = Math.random() * canvas.width;
     const y = Math.random() * canvas.height;

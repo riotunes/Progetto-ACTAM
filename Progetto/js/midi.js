@@ -59,7 +59,7 @@ function playMIDI() {
             }
         })
         lastNode.connect(c.destination);
-        visualizeSound(lastNode);
+        visualizeSound(lastNode, 1);
     }
     o.start();
 }
