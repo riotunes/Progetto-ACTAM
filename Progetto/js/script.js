@@ -1,3 +1,5 @@
+// help window html
+
 function recordinfo() {
     document.getElementById("help-window").innerHTML = "This is the record button! Press it to start and stop the recording of your sounds!";
 }
@@ -24,8 +26,6 @@ function lfoinfo() {
   document.getElementById("help-window").innerHTML = "This is the LFO button! Press it to add an LFO to your sound! Double click on it to access the effect’s specific settings!";
 }
 
-
-// Keep track of the currently open menu
 // Keep track of the currently open menu
 let openMenu = null;
 
@@ -99,8 +99,6 @@ const toggleButtons = document.querySelectorAll('#record, #reverb, #delay, #satu
   });
 });
 
-
-
 // EFFECTS
 
 const c = new (window.AudioContext || window.webkitAudioContext)();
@@ -108,6 +106,7 @@ let delay_par1 = 0.5, delay_par2 = 0.5;
 let dur = 2, decay = 2;
 let g = 250;
 let lfo_par1 = 50;
+
 // DELAY
 
 function delay_function(sound) {
@@ -146,7 +145,6 @@ function reverb_function(sound) {
   return r;
 }
 
-
 // SATURATION
 
 function makeDistortionCurve(g) { // PAR
@@ -167,10 +165,7 @@ function saturation_function(sound) {
   return dist;
 }
 
-
 // LFO
-
-
 
 function lfoeffect_function(sound) {
   const lfo = c.createOscillator();
@@ -181,7 +176,9 @@ function lfoeffect_function(sound) {
   lfo.connect(lfog.gain);
   return lfog;
 }
-/* js/full.js */
+
+// full screen
+
 document.addEventListener('DOMContentLoaded', function() {
   const fullScreenButton = document.getElementById('fullscreen');
   const canvas = document.getElementById('visualizer');
@@ -227,15 +224,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
-/* js/keyboard.js */
+
+// shortcuts
+
 document.addEventListener('DOMContentLoaded', function() {
   document.addEventListener('keydown', function(e) {
     // Ignore keystrokes when focused on inputs or textareas.
     const tagName = e.target.tagName;
     if (tagName === 'INPUT' || tagName === 'TEXTAREA') return;
-
-    // For debugging, you can uncomment the next line:
-    // console.log('Key pressed:', e.code);
 
     // Spacebar triggers pause (simulate clicking the "stop" button)
     if (e.code === 'Space') {

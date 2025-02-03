@@ -1,4 +1,11 @@
-function visualizeSound(node, nPalle) {
+// GRAPHIC RESPONSE
+
+// parameters:
+// audio node
+// number of particles
+// sensitivity to intensity of the sound
+
+function visualizeSound(node, nPalle, sensitivity) {
   // === Canvas Setup ===
   const canvas = document.getElementById("visualizer");
   const ctx = canvas.getContext("2d");
@@ -11,8 +18,7 @@ function visualizeSound(node, nPalle) {
   resizeCanvas();
   window.addEventListener("resize", resizeCanvas);
 
-  // === Audio Analyser Setup ===
-  // NOTE: Ensure that "c" is your valid AudioContext.
+  // Audio Analyser Setup
   const analyser = c.createAnalyser();
   analyser.fftSize = 512;
   node.connect(analyser);
@@ -23,7 +29,7 @@ function visualizeSound(node, nPalle) {
 
   let timeElapsed = 0;
 
-  // === Particle Class ===
+  // Particle Class
   class Particle {
     constructor(x, y, size, hue, speedFactor) {
       this.x = x;
@@ -42,7 +48,7 @@ function visualizeSound(node, nPalle) {
     update(intensity, derivative, timbre) {
       // Scale intensity logarithmically to moderate large values.
       const scaledIntensity = Math.log1p(intensity) * 10;
-      const sizeChange = scaledIntensity / 10 + derivative / 20 + timbre * 1.5;
+      const sizeChange = sensitivity * (scaledIntensity / 10 + derivative / 20 + timbre * 1.5);
       this.size = Math.max(this.baseSize + sizeChange, 5);
 
       // Update position with influence from intensity and timbre.
@@ -82,7 +88,7 @@ function visualizeSound(node, nPalle) {
     }
   }
 
-  // === Particle Initialization ===
+  // Particle Initialization
   const particles = [];
   const particleCount = nPalle;
   const createParticle = () => {
@@ -98,20 +104,19 @@ function visualizeSound(node, nPalle) {
     particles.push(createParticle());
   }
 
-  // === Background Drawing ===
+  // Background Drawing
   const drawBackground = (avgIntensity) => {
     // Draw the trail: a mostly transparent black fill.
     ctx.fillStyle = "rgba(0, 0, 0, 0.3)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Calculate overlay opacity based on average intensity.
-    // Changed from dynamic red to the color #00ffcc (rgb(0, 255, 204)).
     const overlayAlpha = avgIntensity / 255;
     ctx.fillStyle = `rgba(0, 255, 204, ${overlayAlpha})`;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   };
 
-  // === Particle Explosion ===
+  // Particle Explosion
   const particleExplosion = (avgIntensity, avgTimbre) => {
     // Create and render a burst of 50 extra particles.
     for (let i = 0; i < 50; i++) {
@@ -125,7 +130,7 @@ function visualizeSound(node, nPalle) {
     }
   };
 
-  // === Main Animation Loop ===
+  // Main Animation Loop
   function draw() {
     analyser.getByteFrequencyData(dataArray);
 

@@ -20,13 +20,13 @@ function playMic() {
             audioChunks.push(event.data);
         };
         mediaRecorder.onstop = () => {
-            const audioBlob = new Blob(audioChunks, {type: 'audio/wav' }); // che è un blob non l'ho ancora capito
+            const audioBlob = new Blob(audioChunks, {type: 'audio/wav' });
             audioUrl = URL.createObjectURL(audioBlob);
             fetch(audioUrl)
             .then(response => response.arrayBuffer())
             .then(arrayBuffer => c.decodeAudioData(arrayBuffer))
             .then(buffer => {
-                audioBuffer = buffer; // a quanto pare bisogna fare un buffer per l'audio registrato
+                audioBuffer = buffer;
             });
             audioChunks = [];
         }
@@ -81,7 +81,7 @@ function playMic() {
   
       startTime = c.currentTime - currentTime; // tempo d'inizio è tempo attuale assoluto - tempo attuale di riproduzione
       source.start(0, currentTime);
-      visualizeSound(lastNode, 10);
+      visualizeSound(lastNode, 10, 1);
     }
   
     function pause_function() {
