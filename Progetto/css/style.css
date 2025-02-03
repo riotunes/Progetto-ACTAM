@@ -6,7 +6,7 @@ canvas {
   height: 100%;
 }
 
-/* styles.css */
+ /* styles.css */
 
 body {
   margin: 0;
@@ -75,6 +75,7 @@ body {
   position: relative; /* Needed for positioning the help window */
 }
   
+  
 .main-toolbar,
 .effects-toolbar {
   display: flex;
@@ -85,6 +86,7 @@ body {
   flex: 1; /* Fills available space */
   display: flex;
   justify-content: center; /* Centers horizontally */
+
 }
 
 button {
@@ -259,7 +261,7 @@ button:active {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* Section Subtitle */
+/* Section Title */
 .section-subtitle {
   font-size: 1.4em;
   color: #00ffcc; /* Matches the accent color */
@@ -281,16 +283,4 @@ button:active {
   font-size: 1.2em;
   line-height: 1.8;
   margin-bottom: 30px;
-}
-
-/* --- Fullscreen Mode Styles --- */
-/* When the app-container has the class "fullscreen-mode", hide the header and footer (i.e. all UI buttons) */
-.app-container.fullscreen-mode .top-section,
-.app-container.fullscreen-mode .bottom-section {
-  display: none;
-}
-
-/* Optionally, make the central section fill the viewport */
-.app-container.fullscreen-mode .central-section {
-  height: 100vh;
 }
