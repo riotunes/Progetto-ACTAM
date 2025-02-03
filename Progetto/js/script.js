@@ -181,3 +181,87 @@ function lfoeffect_function(sound) {
   lfo.connect(lfog.gain);
   return lfog;
 }
+/* js/full.js */
+document.addEventListener('DOMContentLoaded', function() {
+  const fullScreenButton = document.getElementById('fullscreen');
+  const canvas = document.getElementById('visualizer');
+  const appContainer = document.querySelector('.app-container');
+
+  function enterFullScreen() {
+    if (canvas.requestFullscreen) {
+      canvas.requestFullscreen();
+    } else if (canvas.webkitRequestFullscreen) {
+      canvas.webkitRequestFullscreen();
+    } else if (canvas.msRequestFullscreen) {
+      canvas.msRequestFullscreen();
+    }
+    appContainer.classList.add('fullscreen-mode');
+  }
+
+  function exitFullScreen() {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    }
+    appContainer.classList.remove('fullscreen-mode');
+  }
+
+  if (fullScreenButton && canvas && appContainer) {
+    fullScreenButton.addEventListener('click', function() {
+      enterFullScreen();
+    });
+  }
+
+  document.addEventListener('fullscreenchange', function() {
+    if (!document.fullscreenElement) {
+      appContainer.classList.remove('fullscreen-mode');
+    }
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && document.fullscreenElement) {
+      exitFullScreen();
+    }
+  });
+});
+/* js/keyboard.js */
+document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('keydown', function(e) {
+    // Ignore keystrokes when focused on inputs or textareas.
+    const tagName = e.target.tagName;
+    if (tagName === 'INPUT' || tagName === 'TEXTAREA') return;
+
+    // For debugging, you can uncomment the next line:
+    // console.log('Key pressed:', e.code);
+
+    // Spacebar triggers pause (simulate clicking the "stop" button)
+    if (e.code === 'Space') {
+      e.preventDefault(); // Prevent default scrolling behavior.
+      const stopButton = document.getElementById('play');
+      if (stopButton) {
+        stopButton.click();
+      }
+    }
+
+    // R key triggers record
+    if (e.code === 'KeyR') {
+      e.preventDefault();
+      const recordButton = document.getElementById('record');
+      if (recordButton) {
+        recordButton.click();
+      }
+    }
+
+    // F key triggers full screen mode
+    if (e.code === 'KeyF') {
+      e.preventDefault();
+      const fullScreenButton = document.getElementById('fullscreen');
+      if (fullScreenButton) {
+        fullScreenButton.click();
+      }
+    }
+  });
+});
