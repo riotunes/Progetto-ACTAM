@@ -5,7 +5,7 @@ function playMIDI() {
         navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
     }
     else {
-        alert("Web MIDI API non supportata dal tuo browser.");
+        alert("Web MIDI API not supported.");
     }
     
     function onMIDISuccess(midiAccess) {
@@ -15,7 +15,7 @@ function playMIDI() {
     }
 
     function onMIDIFailure() {
-        console.error("Impossibile accedere alle porte MIDI.");
+        console.error("Could not access MIDI ports.");
     }
 
     const effectButtons = document.querySelectorAll('#reverb, #delay, #saturator, #lfo');
@@ -51,7 +51,16 @@ function playMIDI() {
                     lastNode = reverb_function(lastNode);
                 }
                 else if(effectButton.id === 'saturator'){
-                    lastNode = saturation_function(lastNode);
+                    const sq = c.createOscillator();
+                    sq.type = 'square';
+                    sq.frequency.setValueAtTime(o.frequency.value, c.currentTime);
+                    sqg = c.createGain();
+                    sqg.gain.setValueAtTime(0, c.currentTime);
+                    sqg.gain.linearRampToValueAtTime(1, c.currentTime + 0.1);
+                    sqg.gain.linearRampToValueAtTime(0, c.currentTime + 0.1 + 0.2);
+                    sq.connect(sqg);
+                    lastNode = sqg;
+                    sq.start();
                 }
                 else if(effectButton.id === 'lfo') {
                     lastNode = lfoeffect_function(lastNode);
