@@ -8,11 +8,9 @@ function stopinfo() {
   document.getElementById("help-window").innerHTML = "This is the stop button! Press it to stop the replay of your recording!";
 }
 function settingsinfo() {
-  document.getElementById("help-window").innerHTML = "This is the settings button! Double click it to access the setting menu and choose your audio input!";
+  document.getElementById("help-window").innerHTML = "This is the settings button! Click it to access the setting menu and choose your audio input!";
 }
-function exportinfo() {
-  document.getElementById("help-window").innerHTML = "This is the export button! Press it to export the sounds you recorded and share them with the world!";
-}
+
 function reverbinfo() {
   document.getElementById("help-window").innerHTML = "This is the reverb button! Press it to add a reverb to your sound! Double click on it to access the effect’s specific settings!";
 }
@@ -77,9 +75,14 @@ function applySettings() {
 
 // Close the menu if clicking outside
 document.addEventListener('click', (event) => {
-  if (openMenu && !openMenu.contains(event.target) && !event.target.matches('.effect-button')) {
+  if (
+    openMenu &&
+    !openMenu.contains(event.target) &&
+    !event.target.matches('.effect-button') &&
+    !event.target.closest('#settings')
+  ) {
     openMenu.style.display = 'none';
-    openMenu = null; // No menu is open
+    openMenu = null;
   }
 });
 
@@ -178,68 +181,3 @@ function lfoeffect_function(sound) {
   lfo.connect(lfog.gain);
   return lfog;
 }
-
-/* js/full.js */
-document.addEventListener("DOMContentLoaded", function() {
-  const fsButton = document.getElementById("fullscreen");
-  const canvas = document.getElementById("visualizer");
-  const appContainer = document.querySelector(".app-container");
-
-  if (fsButton && canvas && appContainer) {
-    fsButton.addEventListener("click", function() {
-      // Request fullscreen on the canvas element
-      if (canvas.requestFullscreen) {
-        canvas.requestFullscreen();
-      } else if (canvas.webkitRequestFullscreen) {
-        canvas.webkitRequestFullscreen();
-      } else if (canvas.msRequestFullscreen) {
-        canvas.msRequestFullscreen();
-      }
-      // Add a class to hide UI elements (header, footer, and buttons)
-      appContainer.classList.add("fullscreen-mode");
-    });
-
-    // Listen for changes in fullscreen status.
-    // When the user exits fullscreen, remove the class to show UI again.
-    document.addEventListener("fullscreenchange", function() {
-      if (!document.fullscreenElement) {
-        appContainer.classList.remove("fullscreen-mode");
-      }
-    });
-
-    // Optional: Listen for the Escape key to exit fullscreen.
-    document.addEventListener("keydown", function(e) {
-      if (e.key === "Escape" && document.fullscreenElement) {
-        if (document.exitFullscreen) {
-          document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) {
-          document.webkitExitFullscreen();
-        } else if (document.msExitFullscreen) {
-          document.msExitFullscreen();
-        }
-      }
-    });
-  }
-});
-/* js/keyboard.js */
-document.addEventListener("keydown", function(e) {
-  // Do not interfere with user typing in inputs or textareas.
-  if (["INPUT", "TEXTAREA"].includes(e.target.tagName)) return;
-
-  // Pressing the spacebar simulates a click on the "play" button.
-  if (e.code === "Space") {
-    e.preventDefault(); // Prevent default scrolling behavior.
-    const playButton = document.getElementById("play");
-    if (playButton) {
-      playButton.click();
-    }
-  }
-  // Pressing "r" (or "R") simulates a click on the "record" button.
-  else if (e.code === "KeyR") {
-    e.preventDefault();
-    const recordButton = document.getElementById("record");
-    if (recordButton) {
-      recordButton.click();
-    }
-  }
-});
