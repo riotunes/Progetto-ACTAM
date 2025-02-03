@@ -8,7 +8,7 @@ function stopinfo() {
   document.getElementById("help-window").innerHTML = "This is the stop button! Press it to stop the replay of your recording!";
 }
 function settingsinfo() {
-  document.getElementById("help-window").innerHTML = "This is the settings button! Double click it to access the setting menu and choose your audio input!";
+  document.getElementById("help-window").innerHTML = "This is the settings button! Click it to access the setting menu and choose your audio input!";
 }
 function exportinfo() {
   document.getElementById("help-window").innerHTML = "This is the export button! Press it to export the sounds you recorded and share them with the world!";
@@ -77,9 +77,14 @@ function applySettings() {
 
 // Close the menu if clicking outside
 document.addEventListener('click', (event) => {
-  if (openMenu && !openMenu.contains(event.target) && !event.target.matches('.effect-button')) {
+  if (
+    openMenu &&
+    !openMenu.contains(event.target) &&
+    !event.target.matches('.effect-button') &&
+    !event.target.closest('#settings')
+  ) {
     openMenu.style.display = 'none';
-    openMenu = null; // No menu is open
+    openMenu = null;
   }
 });
 
