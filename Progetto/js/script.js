@@ -10,9 +10,7 @@ function stopinfo() {
 function settingsinfo() {
   document.getElementById("help-window").innerHTML = "This is the settings button! Click it to access the setting menu and choose your audio input!";
 }
-function exportinfo() {
-  document.getElementById("help-window").innerHTML = "This is the export button! Press it to export the sounds you recorded and share them with the world!";
-}
+
 function reverbinfo() {
   document.getElementById("help-window").innerHTML = "This is the reverb button! Press it to add a reverb to your sound! Double click on it to access the effect’s specific settings!";
 }
